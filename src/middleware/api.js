@@ -1,3 +1,25 @@
+import { normalize, schema } from 'normalizr';
+
+// Schemas
+const genre = new schema.Entity('genres');
+const serie = new schema.Entity('series', {
+  genre: genre,
+
+}, {
+  processStrategy: (entity) => {
+    let e = Object.assign({}, entity);
+    delete e.type;
+    delete e.language;
+    delete e.runtime;
+    delete e.premiered;
+    delete e.weight;
+    delete e.network;
+    delete e.webChannel;
+    delete e.externals;
+    delete e._links;
+  }
+});
+
 // Redux middleware
 export const API_MIDDLEWARE = 'API_MIDDLEWARE';
 
