@@ -1,4 +1,19 @@
 import { normalize, schema } from 'normalizr';
+import axios from 'axios';
+
+// API call
+const API_ROOT = 'http://api.tvmaze.com/';
+const callApi = (endpoint, schema) => {
+  const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
+
+  return axios.get(fullUrl, {
+    validateStatus: function (status) {
+      return status >= 200 && status < 500;
+    }
+  }).then(response => response.json().then(json => {
+    return Object.assign({}, normalize(json, schema))
+  }));
+}
 
 // Schemas
 const genre = new schema.Entity('genres');
@@ -19,6 +34,11 @@ const serie = new schema.Entity('series', {
     delete e._links;
   }
 });
+
+export const Schemas = {
+  SERIE: serie,
+  SERIE_ARRAY: [serie]
+}
 
 // Redux middleware
 export const API_MIDDLEWARE = 'API_MIDDLEWARE';
