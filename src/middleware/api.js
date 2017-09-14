@@ -10,16 +10,14 @@ const callApi = (endpoint, schema) => {
     validateStatus: function (status) {
       return status >= 200 && status < 500;
     }
-  }).then(response => response.json().then(json => {
-    return Object.assign({}, normalize(json, schema))
-  }));
+  }).then(response => {
+    const shows = response.data.map(s => s.show);
+    return Object.assign({}, normalize(shows, schema));
+  });
 }
 
 // Schemas
-const genre = new schema.Entity('genres');
 const serie = new schema.Entity('series', {
-  genre: genre,
-
 }, {
   processStrategy: (entity) => {
     let e = Object.assign({}, entity);
@@ -32,6 +30,7 @@ const serie = new schema.Entity('series', {
     delete e.webChannel;
     delete e.externals;
     delete e._links;
+    return e;
   }
 });
 
