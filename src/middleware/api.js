@@ -18,9 +18,9 @@ const callApi = (endpoint, query, schema) => {
 
 // Schemas
 const serie = new schema.Entity('series', {}, {
-  idAttribute: (entity) => entity.show.id,
+  idAttribute: (entity) => entity.show ? entity.show.id : entity.id,
   processStrategy: (entity) => {
-    return omit(entity.show, [
+    return omit(entity.show ? entity.show : entity, [
       'type', 'language', 'runtime', 
       'premiered', 'weight', 'network', 
       'webChannel', 'externals', '_links'
