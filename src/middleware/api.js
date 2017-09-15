@@ -1,4 +1,5 @@
 import { normalize, schema } from 'normalizr';
+import omit from 'lodash/omit';
 import axios from 'axios';
 
 // API call
@@ -10,33 +11,33 @@ const callApi = (endpoint, query, schema) => {
     validateStatus: function (status) {
       return status >= 200 && status < 500;
     }
-  }).then(response => {
-    const shows = response.data.map(s => s.show);
-    return Object.assign({}, normalize(shows, schema));
+  }).then(({ data }) => {
+    return Object.assign({}, normalize(data, schema));
   });
 }
 
 // Schemas
-const serie = new schema.Entity('series', {
-}, {
+const serie = new schema.Entity('series', {}, {
+  idAttribute: (entity) => entity.show.id,
   processStrategy: (entity) => {
-    let e = Object.assign({}, entity);
-    delete e.type;
-    delete e.language;
-    delete e.runtime;
-    delete e.premiered;
-    delete e.weight;
-    delete e.network;
-    delete e.webChannel;
-    delete e.externals;
-    delete e._links;
-    return e;
+    return omit(entity.show, [
+      'type', 'language', 'runtime', 
+      'premiered', 'weight', 'network', 
+      'webChannel', 'externals', '_links'
+    ]);
   }
+});
+
+const actor = new schema.Entity('actors', {}, {
+  idAttribute: (entity) => entity.person.id,
+  processStrategy: (entity) => entity.person
 });
 
 export const Schemas = {
   SERIE: serie,
-  SERIE_ARRAY: [serie]
+  SERIE_ARRAY: [ serie ],
+  ACTOR: actor,
+  ACTOR_ARRAY: [ actor ]
 }
 
 // Redux middleware
