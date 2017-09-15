@@ -21,8 +21,7 @@ export const fetchSerie = serieID => ({
   serieID,
   [API_MIDDLEWARE]: {
     types: [ SERIE_REQUEST, SERIE_SUCCESS, SERIE_FAILURE ],
-    endpoint: 'singlesearch/shows',
-    query: { q: serieID },
+    endpoint: `shows/${serieID}`,
     schema: Schemas.SERIE
   }
 });
