@@ -12,3 +12,41 @@ export const searchSerie = serie => ({
     schema: Schemas.SERIE_ARRAY
   }
 });
+
+export const SERIE_REQUEST = 'SERIE_REQUEST';
+export const SERIE_SUCCESS = 'SERIE_SUCCESS';
+export const SERIE_FAILURE = 'SERIE_FAILURE';
+
+export const fetchSerie = serieID => ({
+  serieID,
+  [API_MIDDLEWARE]: {
+    types: [ SERIE_REQUEST, SERIE_SUCCESS, SERIE_FAILURE ],
+    endpoint: 'singlesearch/shows',
+    query: { q: serieID },
+    schema: Schemas.SERIE
+  }
+});
+
+export const SERIE_CAST_REQUEST = 'SERIE_CAST_REQUEST'; 
+export const SERIE_CAST_SUCCESS = 'SERIE_CAST_SUCCESS'; 
+export const SERIE_CAST_FAILURE = 'SERIE_CAST_FAILURE';
+
+export const fetchSerieCast = (serieID) => ({
+  [API_MIDDLEWARE]: {
+    types: [ SERIE_CAST_REQUEST, SERIE_CAST_SUCCESS, SERIE_CAST_FAILURE ],
+    endpoint: `shows/${serieID}/cast`,
+    schema: Schemas.ACTOR_ARRAY
+  }
+});
+
+export const loadSerie = (serieID, requiredFields = []) => (dispatch, getState) => {
+  const serie = getState().entities.series[serieID];
+
+  if (serie && requiredFields.every(key => serie.hasOwnProperty(key))) {
+    return null;
+  } else if (serie) {
+    return dispatch(fetchSerieCast(serieID))
+  }
+
+  return dispatch(fetchSerieCast(serieID)).then(response => dispatch(fetchSerie(serieID)));
+}
