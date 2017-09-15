@@ -7,7 +7,8 @@ export const SEARCH_FAILURE = 'SEARCH_FAILURE';
 export const searchSerie = serie => ({
   [API_MIDDLEWARE]: {
     types: [ SEARCH_REQUEST, SEARCH_SUCCESS, SEARCH_FAILURE ],
-    endpoint: `search/shows?q=${serie}`,
+    endpoint: 'search/shows',
+    query: { q: serie },
     schema: Schemas.SERIE_ARRAY
   }
 });

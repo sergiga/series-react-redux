@@ -3,10 +3,10 @@ import axios from 'axios';
 
 // API call
 const API_ROOT = 'http://api.tvmaze.com/';
-const callApi = (endpoint, schema) => {
+const callApi = (endpoint, query, schema) => {
   const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
 
-  return axios.get(fullUrl, {
+  return axios.get(fullUrl, { params: query }, {
     validateStatus: function (status) {
       return status >= 200 && status < 500;
     }
@@ -49,7 +49,7 @@ export default store => next => action => {
     next(action);
   }
 
-  const { endpoint, types, schema } = apiCall;
+  const { endpoint, query, types, schema } = apiCall;
 
   if(typeof endpoint !== 'string') {
     throw new Error('Expecting the endpoint to be a string');
@@ -74,7 +74,7 @@ export default store => next => action => {
 
   next(actionWith({ type: requestType }));
 
-  return callApi(endpoint, schema).then(
+  return callApi(endpoint, query, schema).then(
     response => next(actionWith({
       response,
       type: successType
