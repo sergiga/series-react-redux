@@ -18,10 +18,10 @@ export const SERIE_SUCCESS = 'SERIE_SUCCESS';
 export const SERIE_FAILURE = 'SERIE_FAILURE';
 
 export const fetchSerie = serieID => ({
-  serieID,
   [API_MIDDLEWARE]: {
     types: [ SERIE_REQUEST, SERIE_SUCCESS, SERIE_FAILURE ],
     endpoint: `shows/${serieID}`,
+    query: { embed: 'cast' },
     schema: Schemas.SERIE
   }
 });
@@ -31,6 +31,7 @@ export const SERIE_CAST_SUCCESS = 'SERIE_CAST_SUCCESS';
 export const SERIE_CAST_FAILURE = 'SERIE_CAST_FAILURE';
 
 export const fetchSerieCast = (serieID) => ({
+  serieID,
   [API_MIDDLEWARE]: {
     types: [ SERIE_CAST_REQUEST, SERIE_CAST_SUCCESS, SERIE_CAST_FAILURE ],
     endpoint: `shows/${serieID}/cast`,
@@ -47,5 +48,5 @@ export const loadSerie = (serieID, requiredFields = []) => (dispatch, getState) 
     return dispatch(fetchSerieCast(serieID))
   }
 
-  return dispatch(fetchSerieCast(serieID)).then(response => dispatch(fetchSerie(serieID)));
+  return dispatch(fetchSerie(serieID));
 }
