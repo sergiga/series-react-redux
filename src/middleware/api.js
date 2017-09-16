@@ -17,20 +17,26 @@ const callApi = (endpoint, query, schema) => {
 }
 
 // Schemas
-const serie = new schema.Entity('series', {}, {
-  idAttribute: (entity) => entity.show ? entity.show.id : entity.id,
-  processStrategy: (entity) => {
-    return omit(entity.show ? entity.show : entity, [
-      'type', 'language', 'runtime', 
-      'premiered', 'weight', 'network', 
-      'webChannel', 'externals', '_links'
-    ]);
-  }
-});
-
 const actor = new schema.Entity('actors', {}, {
   idAttribute: (entity) => entity.person.id,
   processStrategy: (entity) => entity.person
+});
+
+const serie = new schema.Entity('series', {
+  cast: [ actor ]
+}, {
+  idAttribute: (entity) => entity.show ? entity.show.id : entity.id,
+  processStrategy: (entity) => {
+    let serie = entity.show ? entity.show : entity;
+
+    if(serie._embedded) { serie.cast = serie._embedded.cast }
+
+    return omit(serie, [
+      'type', 'language', 'runtime', 
+      'premiered', 'weight', 'network', 
+      'webChannel', 'externals', '_embedded', '_links'
+    ]);
+  }
 });
 
 export const Schemas = {
