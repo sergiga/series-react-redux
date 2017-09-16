@@ -16,6 +16,11 @@ const actors = (state = {}, action) => {
 const series = (state = {}, action) => {
   switch(action.type) {
     case ActionTypes.SERIE_CAST_SUCCESS:
+      if(state[action.serieID]) {
+        let nextState = merge({}, state);
+        nextState[action.serieID].cast = Object.keys(action.response.entities.actors);
+        return nextState;
+      }
       return state;
     default:
       return mergeEntities(state, action, 'series');
