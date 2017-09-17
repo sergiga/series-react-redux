@@ -1,12 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import apiMiddleware from './middleware/api';
 import rootReducer from './reducers/index';
-import { searchSerie } from './actions/index';
-import App from './views/App';
+import Root from './containers/Root';
 
 const store = createStore(
   rootReducer,
@@ -16,13 +15,9 @@ const store = createStore(
   )
 );
 
-store
-  .dispatch(searchSerie('girls'))
-  .then(() => console.log(store.getState()));
-
 render(
-  <Provider store={store}>
-    <App />
-  </Provider>, 
+  <Router>
+    <Root store={store} />
+  </Router>,
   document.getElementById('root')
 );
