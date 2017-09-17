@@ -1,5 +1,6 @@
 import * as ActionTypes from '../actions';
 import merge from 'lodash/merge';
+import union from 'lodash/union';
 import { combineReducers } from 'redux';
 
 const mergeEntities = (state, action, entity) => {
@@ -27,11 +28,40 @@ const series = (state = {}, action) => {
   }
 }
 
+const pagination = (state = {
+    isFetching: false,
+    nextPage: 0,
+    shows: []
+  }, action) => {
+    switch (action.type) {
+      case ActionTypes.SERIE_PAGE_REQUEST:
+        return {
+          ...state,
+          isFetching: true
+        };
+      case ActionTypes.SERIE_PAGE_SUCCESS:
+        return {
+          ...state,
+          isFetching: false,
+          shows: union(state.shows, action.response.result),
+          nextPage: state.nextPage + 1
+        };
+      case ActionTypes.SERIE_PAGE_FAILURE:
+        return {
+          ...state,
+          isFetching: false
+        };
+      default:
+        return state;
+    }
+}
+
 const reducer = combineReducers({
   entities: combineReducers({
     actors,
     series
-  })
+  }),
+  pagination
 });
 
 export default reducer;
