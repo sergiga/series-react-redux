@@ -13,6 +13,19 @@ export const searchSerie = serie => ({
   }
 });
 
+export const SERIE_PAGE_REQUEST = 'SERIE_PAGE_REQUEST';
+export const SERIE_PAGE_SUCCESS = 'SERIE_PAGE_SUCCESS';
+export const SERIE_PAGE_FAILURE = 'SERIE_PAGE_FAILURE';
+
+export const fetchSeriePage = (page = 0) => ({
+  [API_MIDDLEWARE]: {
+    types: [ SERIE_PAGE_REQUEST, SERIE_PAGE_SUCCESS, SERIE_PAGE_FAILURE ],
+    endpoint: 'shows',
+    query: { page },
+    schema: Schemas.SERIE_ARRAY
+  }
+});
+
 export const SERIE_REQUEST = 'SERIE_REQUEST';
 export const SERIE_SUCCESS = 'SERIE_SUCCESS';
 export const SERIE_FAILURE = 'SERIE_FAILURE';
