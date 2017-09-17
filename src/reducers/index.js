@@ -18,7 +18,7 @@ const series = (state = {}, action) => {
     case ActionTypes.SERIE_CAST_SUCCESS:
       if(state[action.serieID]) {
         let nextState = merge({}, state);
-        nextState[action.serieID].cast = Object.keys(action.response.entities.actors);
+        nextState[action.serieID].cast = action.response.result;
         return nextState;
       }
       return state;
