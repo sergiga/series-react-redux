@@ -1,4 +1,5 @@
 import { normalize, schema } from 'normalizr';
+import omit from 'lodash/omit';
 import axios from 'axios';
 
 // API call
@@ -10,33 +11,39 @@ const callApi = (endpoint, query, schema) => {
     validateStatus: function (status) {
       return status >= 200 && status < 500;
     }
-  }).then(response => {
-    const shows = response.data.map(s => s.show);
-    return Object.assign({}, normalize(shows, schema));
+  }).then(({ data }) => {
+    return Object.assign({}, normalize(data, schema));
   });
 }
 
 // Schemas
+const actor = new schema.Entity('actors', {}, {
+  idAttribute: (entity) => entity.person.id,
+  processStrategy: (entity) => entity.person
+});
+
 const serie = new schema.Entity('series', {
+  cast: [ actor ]
 }, {
+  idAttribute: (entity) => entity.show ? entity.show.id : entity.id,
   processStrategy: (entity) => {
-    let e = Object.assign({}, entity);
-    delete e.type;
-    delete e.language;
-    delete e.runtime;
-    delete e.premiered;
-    delete e.weight;
-    delete e.network;
-    delete e.webChannel;
-    delete e.externals;
-    delete e._links;
-    return e;
+    let serie = entity.show ? entity.show : entity;
+
+    if(serie._embedded) { serie.cast = serie._embedded.cast }
+
+    return omit(serie, [
+      'type', 'language', 'runtime', 
+      'premiered', 'weight', 'network', 
+      'webChannel', 'externals', '_embedded', '_links'
+    ]);
   }
 });
 
 export const Schemas = {
   SERIE: serie,
-  SERIE_ARRAY: [serie]
+  SERIE_ARRAY: [ serie ],
+  ACTOR: actor,
+  ACTOR_ARRAY: [ actor ]
 }
 
 // Redux middleware
