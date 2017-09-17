@@ -31,7 +31,7 @@ const series = (state = {}, action) => {
 const pagination = (state = {
     isFetching: false,
     nextPage: 0,
-    shows: []
+    series: []
   }, action) => {
     switch (action.type) {
       case ActionTypes.SERIE_PAGE_REQUEST:
@@ -43,7 +43,7 @@ const pagination = (state = {
         return {
           ...state,
           isFetching: false,
-          shows: union(state.shows, action.response.result),
+          series: union(state.series, action.response.result),
           nextPage: state.nextPage + 1
         };
       case ActionTypes.SERIE_PAGE_FAILURE:
