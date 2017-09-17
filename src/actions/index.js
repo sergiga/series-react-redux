@@ -26,6 +26,13 @@ export const fetchSeriePage = (page = 0) => ({
   }
 });
 
+export const loadSeriePage = (page = 0) => (dispatch, getState) => {
+  if(page !== getState().pagination.nextPage) {
+    return null;
+  }
+  return dispatch(fetchSeriePage(page));
+}
+
 export const SERIE_REQUEST = 'SERIE_REQUEST';
 export const SERIE_SUCCESS = 'SERIE_SUCCESS';
 export const SERIE_FAILURE = 'SERIE_FAILURE';
