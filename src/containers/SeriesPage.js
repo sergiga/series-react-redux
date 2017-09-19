@@ -2,16 +2,28 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loadSeriePage } from '../actions';
+import Grid from '../views/Grid';
 
 class SeriesPage extends Component {
   componentWillMount() {
     this.props.loadSeriePage();
   }
 
-  render() {
+  renderSerie(serie) {
     return (
-      <div>
+      <div key={serie.id}>
+        {serie.name}
       </div>
+    );
+  }
+
+  render() {
+    const { allSeries } = this.props;
+
+    return (
+      <Grid
+        items={allSeries}
+        renderItem={this.renderSerie} />
     )
   }
 }
