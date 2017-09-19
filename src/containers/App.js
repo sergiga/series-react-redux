@@ -1,9 +1,10 @@
 import React from 'react';
+import MainContainer from '../views/MainContainer';
 
 const App = (props) => (
-  <div>
+  <MainContainer>
     { props.children }
-  </div>
+  </MainContainer>
 )
 
 export default App;
