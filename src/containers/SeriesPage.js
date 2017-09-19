@@ -18,14 +18,14 @@ class SeriesPage extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const {
-    pagination,
+    serieList: { pagination },
     entities: { series }
-  } = state
+  } = state;
 
-  const seriesPagination = pagination.series.map(id => series[id]);
+  const allSeries = pagination.series.map(id => series[id]);
 
   return {
-    seriesPagination
+    allSeries
   }
 }
 
