@@ -1,25 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Grid extends Component {
-  
-  renderItems(items) {
-    return items.map((item, i) => { 
-      <div 
-        key={item.id || i}
-        className='grid-item'>
-          {item.component}
-      </div>
-    });
-  }
+function Grid (props) {
+  const { items, renderItem } = props;
 
-  render() {
-    const { renderItems } = this.props;
-    return(
-      <div className='grid-container'>
-        {renderItems(renderItems)}    
-      </div>
-    );
-  }
+  return(
+    <div className='grid-container'>
+      {items.map(item => <div key={item.id} className='grid-item'>{renderItem(item)}</div>)}    
+    </div>
+  );
 }
 
 export default Grid;
