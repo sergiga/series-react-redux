@@ -28,6 +28,17 @@ const series = (state = {}, action) => {
   }
 }
 
+const searchResults = (state = false, action) => {
+  switch(action.type) {
+    case ActionTypes.SEARCH_SUCCESS:
+      return true;
+    case ActionTypes.SHOW_ALL_SERIES:
+      return false;
+    default:
+      return state;
+  }
+}
+
 const pagination = (state = {
     isFetching: false,
     nextPage: 0,
