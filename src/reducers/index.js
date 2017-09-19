@@ -28,7 +28,7 @@ const series = (state = {}, action) => {
   }
 }
 
-const searchResults = (state = false, action) => {
+const showSearchResults = (state = false, action) => {
   switch(action.type) {
     case ActionTypes.SEARCH_SUCCESS:
       return true;
