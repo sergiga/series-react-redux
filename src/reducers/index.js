@@ -67,12 +67,17 @@ const pagination = (state = {
     }
 }
 
+const serieList = combineReducers({
+  showSearchResults,
+  pagination
+});
+
 const reducer = combineReducers({
   entities: combineReducers({
     actors,
     series
   }),
-  pagination
+  serieList
 });
 
 export default reducer;
