@@ -5,6 +5,10 @@ import { loadSeriePage } from '../actions';
 import Grid from '../views/Grid';
 
 class SeriesPage extends Component {
+  static propTypes = {
+    allSeries: PropTypes.array.isRequired
+  }
+  
   componentWillMount() {
     this.props.loadSeriePage();
   }
