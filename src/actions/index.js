@@ -70,3 +70,12 @@ export const loadSerie = (serieID, requiredFields = []) => (dispatch, getState) 
 
   return dispatch(fetchSerie(serieID));
 }
+
+export const SHOW_ALL_SERIES = 'SHOW_ALL_SERIES';
+
+export const showAllSeries = () => (dispatch, getState) => {
+  if(!getState().serieList.showSearchResults) { 
+    return null;
+  }
+  return dispatch(() => ({ type: SHOW_ALL_SERIES }));
+}
