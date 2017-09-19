@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import App from '../views/App';
+import App from './App';
 import SeriesPage from './SeriesPage';
 
 const Root = ({ store }) => (
