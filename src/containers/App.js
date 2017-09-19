@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import MainContainer from '../views/MainContainer';
 
 const App = (props) => (
@@ -6,5 +7,9 @@ const App = (props) => (
     { props.children }
   </MainContainer>
 )
+
+App.propTypes = {
+  children: PropTypes.node
+}
 
 export default App;
