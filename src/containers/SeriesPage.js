@@ -9,9 +9,19 @@ class SeriesPage extends Component {
   static propTypes = {
     allSeries: PropTypes.array.isRequired
   }
+
+  constructor(props) {
+    super(props);
+    this.onLoadMoreClick = this.onLoadMoreClick.bind(this);
+  }
   
   componentWillMount() {
     this.props.loadSeriePage();
+  }
+
+  onLoadMoreClick() {
+    const { loadSeriePage, nextPage } = this.props;
+    loadSeriePage(nextPage);
   }
 
   renderSerie(serie) {
@@ -29,7 +39,8 @@ class SeriesPage extends Component {
     return (
       <Grid
         items={allSeries}
-        renderItem={this.renderSerie} />
+        renderItem={this.renderSerie} 
+        onLoadMoreClick={this.onLoadMoreClick} />
     )
   }
 }
@@ -39,11 +50,12 @@ const mapStateToProps = (state, ownProps) => {
     serieList: { pagination },
     entities: { series }
   } = state;
-
+  
   const allSeries = pagination.series.map(id => series[id]);
 
   return {
-    allSeries
+    allSeries,
+    nextPage: pagination.nextPage
   }
 }
 
