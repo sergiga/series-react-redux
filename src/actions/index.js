@@ -79,5 +79,5 @@ export const showAllSeries = () => (dispatch, getState) => {
   if(!getState().serieList.showSearchResults) { 
     return null;
   }
-  return dispatch(() => ({ type: SHOW_ALL_SERIES }));
+  return dispatch({ type: SHOW_ALL_SERIES });
 }
