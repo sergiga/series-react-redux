@@ -5,14 +5,14 @@ export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
 export const SEARCH_FAILURE = 'SEARCH_FAILURE';
 
 export const searchSerie = serie => dispatch => {
-  return dispatch(() => ({
+  return dispatch({
     [API_MIDDLEWARE]: {
       types: [ SEARCH_REQUEST, SEARCH_SUCCESS, SEARCH_FAILURE ],
       endpoint: 'search/shows',
       query: { q: serie },
       schema: Schemas.SERIE_ARRAY
     }
-  }));
+  });
 }
 
 export const SERIE_PAGE_REQUEST = 'SERIE_PAGE_REQUEST';
