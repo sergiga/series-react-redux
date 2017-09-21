@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function Thumbnail(props) {
   const { image, title } = props;
@@ -11,6 +12,11 @@ function Thumbnail(props) {
       </div>
     </div>
   );
+}
+
+Thumbnail.propTypes = {
+  image: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired
 }
 
 export default Thumbnail;

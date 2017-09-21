@@ -7,7 +7,8 @@ import Thumbnail from '../views/Thumbnail';
 
 class SeriesPage extends Component {
   static propTypes = {
-    allSeries: PropTypes.array.isRequired
+    allSeries: PropTypes.array.isRequired,
+    nextPage: PropTypes.number.isRequired
   }
 
   constructor(props) {
