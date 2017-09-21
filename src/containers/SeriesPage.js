@@ -28,8 +28,7 @@ class SeriesPage extends Component {
     return (
       <Thumbnail
         image={serie.image.medium}
-        title={serie.name}
-        meta={serie.rating.average} />
+        title={serie.name} />
     );
   }
 
