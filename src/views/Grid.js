@@ -29,7 +29,7 @@ class Grid extends Component {
 Grid.propTypes = {
   items: PropTypes.array.isRequired,
   renderItem: PropTypes.func.isRequired,
-  onLoadMoreClick: PropTypes.func.isRequired
+  onLoadMoreClick: PropTypes.func
 }
 
 export default Grid;
