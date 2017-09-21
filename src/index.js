@@ -7,6 +7,7 @@ import apiMiddleware from './middleware/api';
 import rootReducer from './reducers/index';
 import Root from './containers/Root';
 import './styles/index.css';
+import '../node_modules/font-awesome/css/font-awesome.min.css';
 
 const store = createStore(
   rootReducer,
