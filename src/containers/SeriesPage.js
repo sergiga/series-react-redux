@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loadSeriePage } from '../actions';
 import Grid from '../views/Grid';
+import Thumbnail from '../views/Thumbnail';
 
 class SeriesPage extends Component {
   static propTypes = {
@@ -15,9 +16,10 @@ class SeriesPage extends Component {
 
   renderSerie(serie) {
     return (
-      <div key={serie.id}>
-        {serie.name}
-      </div>
+      <Thumbnail
+        image={serie.image.medium}
+        title={serie.name}
+        meta={serie.rating.average} />
     );
   }
 
