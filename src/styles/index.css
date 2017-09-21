@@ -26,13 +26,45 @@ body {
   margin: auto;
 }
 
+button, input {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+button {
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 4px;
+  background-color: #9E9E9E;
+}
+
+button::-moz-focus-inner{
+  padding : 0;
+  border  : 0;
+}
+
+button:focus {
+  outline: none;
+}
+
+/* Grid */
+
 .grid-container {
   display: flex;
   flex-wrap: wrap;
 }
 
-.grid-item {
+.grid-item, .grid--load-more {
   padding: 25px;
+}
+
+.grid--load-more button {
+  width: 100%;
+  padding: 8px 0px;
 }
 
 /* Thumbnail */
@@ -50,7 +82,11 @@ body {
 }
 
 .thumbnail-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 24px 8px;
+  min-height: 36px;
   font-weight: bold;
   text-align: center;
   text-transform: uppercase;
