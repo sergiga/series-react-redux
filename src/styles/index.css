@@ -91,6 +91,29 @@ button:focus {
   text-transform: uppercase;
 }
 
+/* Search Bar */
+
+.search-bar {
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 25px 25px 0px 25px;
+}
+
+.search-bar input {
+  width: 210px;
+  margin-right: 12px;
+  border-bottom: 1px solid #CCC;
+}
+
+.search-bar input:focus {
+  outline: none;
+}
+
+.search-bar button {
+  background-color: #FFF;
+  color: #CCC;
+}
+
 @media (max-width: 1100px) {
   .container {
     max-width: 780px;

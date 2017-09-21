@@ -30,12 +30,12 @@ class SearchBar extends Component {
     
     return (
       <div className='search-bar'>
+        <button onClick={ () => onSearchSerieClick(serie) } ><i className='fa fa-search'></i></button>
         <input 
           name='serie' 
           type='text'
           value={serie}
           onChange={this.handleInputChange} />
-        <button onClick={ () => onSearchSerieClick(serie) } >SEARCH</button>
       </div>
     );
   }
