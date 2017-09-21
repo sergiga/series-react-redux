@@ -53,7 +53,7 @@ export default store => next => action => {
   const apiCall = action[API_MIDDLEWARE];
 
   if(!apiCall) {
-    next(action);
+    return next(action);
   }
 
   const { endpoint, query, types, schema } = apiCall;
