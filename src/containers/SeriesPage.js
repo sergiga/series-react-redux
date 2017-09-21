@@ -5,6 +5,7 @@ import { loadSeriePage, searchSerie } from '../actions';
 import Grid from '../views/Grid';
 import Thumbnail from '../views/Thumbnail';
 import SearchBar from '../views/SearchBar';
+import Header from '../views/Header';
 
 class SeriesPage extends Component {
   static propTypes = {
@@ -50,7 +51,9 @@ class SeriesPage extends Component {
 
     return (
       <div>
-        <SearchBar onSearchSerieClick={this.onSearchSerieClick} />
+        <Header
+          left={<button>Show All Series</button>}
+          right={<SearchBar onSearchSerieClick={this.onSearchSerieClick} />} />
         <Grid
           items={allSeries}
           renderItem={this.renderSerie} 

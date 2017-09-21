@@ -101,12 +101,25 @@ button:focus {
   text-transform: uppercase;
 }
 
+/* Header */ 
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 25px 25px 0px 25px;
+}
+
+.header button {
+  font-size: 14px;
+  text-transform: uppercase;
+  background-color: #FFF;
+}
+
 /* Search Bar */
 
 .search-bar {
   display: flex;
   flex-direction: row-reverse;
-  padding: 25px 25px 0px 25px;
 }
 
 .search-bar input {
