@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loadSeriePage, searchSerie } from '../actions';
+import { loadSeriePage, searchSerie, showAllSeries } from '../actions';
 import Grid from '../views/Grid';
 import Thumbnail from '../views/Thumbnail';
 import SearchBar from '../views/SearchBar';
@@ -12,7 +12,8 @@ class SeriesPage extends Component {
     allSeries: PropTypes.array.isRequired,
     nextPage: PropTypes.number.isRequired,
     loadSeriePage: PropTypes.func.isRequired, 
-    searchSerie: PropTypes.func.isRequired
+    searchSerie: PropTypes.func.isRequired,
+    showAllSeries: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -47,12 +48,12 @@ class SeriesPage extends Component {
   }
 
   render() {
-    const { allSeries, showSearchResults } = this.props;
+    const { allSeries, showSearchResults, showAllSeries } = this.props;
 
     return (
       <div>
         <Header
-          left={<button>Show All Series</button>}
+          left={<button onClick={showAllSeries}>Show All Series</button>}
           right={<SearchBar onSearchSerieClick={this.onSearchSerieClick} />} />
         <Grid
           items={allSeries}
@@ -84,6 +85,7 @@ export default connect(
   mapStateToProps,
   {
     loadSeriePage, 
-    searchSerie
+    searchSerie,
+    showAllSeries
   }
 )(SeriesPage);
