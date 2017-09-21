@@ -39,6 +39,15 @@ const showSearchResults = (state = false, action) => {
   }
 }
 
+const searchResults = (state = [], action) => {
+  switch(action.type) {
+    case ActionTypes.SEARCH_SUCCESS:
+      return action.response.result;
+    default:
+      return state;
+  }
+}
+
 const pagination = (state = {
     isFetching: false,
     nextPage: 0,
@@ -69,6 +78,7 @@ const pagination = (state = {
 
 const serieList = combineReducers({
   showSearchResults,
+  searchResults,
   pagination
 });
 
