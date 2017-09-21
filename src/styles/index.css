@@ -1,0 +1,90 @@
+a, abbr, acronym, address, applet, article,
+aside, audio, b, big, blockquote, body, canvas,
+caption, center, cite, code, dd, del, details,
+dfn, div, dl, dt, em, embed, fieldset, figcaption,
+figure, footer, form, h1, h2, h3, h4, h5, h6,
+header, hgroup, html, i, iframe, img, ins,
+kbd, label, legend, li, mark, menu, nav, object,
+ol, output, p, pre, q, ruby, s, samp, section,
+small, span, strike, strong, sub, summary, sup,
+table, tbody, td, tfoot, th, thead, time, tr, tt,
+u, ul, var, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+
+body {
+  font-family: sans-serif;
+  color: #444;
+}
+
+.container {
+  max-width: 1040px;
+  width: 1040px;
+  margin: auto;
+}
+
+.grid-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.grid-item {
+  padding: 25px;
+}
+
+/* Thumbnail */
+
+.thumbnail {
+  max-width: 210px;
+  overflow: hidden;
+  border-radius: 2px;
+  box-shadow: 0 2px 3px rgba(10,10,10,0.1), 0 0 0 1px rgba(10,10,10,0.1);
+}
+
+.thumbnail-content {
+  position: relative;
+  min-height: 53px;
+}
+
+.thumbnail-title {
+  padding: 24px 8px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.thumbnail-meta {
+  position: absolute;
+  top: 0px;
+  right: 4px;
+  z-index: 1000;
+  font-size: 14px;
+  color: rgba(0,0,0,0.54);
+}
+
+@media (max-width: 1100px) {
+  .container {
+    max-width: 780px;
+    width: 780px;
+    margin: auto;
+  }
+}
+
+@media (max-width: 796px) {
+  .container {
+    max-width: 520px;
+    width: 520px;
+    margin: auto;
+  }
+}
+
+@media (max-width: 536px) {
+  .container {
+    max-width: 260px;
+    width: 260px;
+    margin: auto;
+  }
+}

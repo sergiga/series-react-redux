@@ -28,10 +28,21 @@ const series = (state = {}, action) => {
   }
 }
 
+const showSearchResults = (state = false, action) => {
+  switch(action.type) {
+    case ActionTypes.SEARCH_SUCCESS:
+      return true;
+    case ActionTypes.SHOW_ALL_SERIES:
+      return false;
+    default:
+      return state;
+  }
+}
+
 const pagination = (state = {
     isFetching: false,
     nextPage: 0,
-    shows: []
+    series: []
   }, action) => {
     switch (action.type) {
       case ActionTypes.SERIE_PAGE_REQUEST:
@@ -43,7 +54,7 @@ const pagination = (state = {
         return {
           ...state,
           isFetching: false,
-          shows: union(state.shows, action.response.result),
+          series: union(state.series, action.response.result),
           nextPage: state.nextPage + 1
         };
       case ActionTypes.SERIE_PAGE_FAILURE:
@@ -56,12 +67,17 @@ const pagination = (state = {
     }
 }
 
+const serieList = combineReducers({
+  showSearchResults,
+  pagination
+});
+
 const reducer = combineReducers({
   entities: combineReducers({
     actors,
     series
   }),
-  pagination
+  serieList
 });
 
 export default reducer;

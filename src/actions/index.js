@@ -26,6 +26,13 @@ export const fetchSeriePage = (page = 0) => ({
   }
 });
 
+export const loadSeriePage = (page = 0) => (dispatch, getState) => {
+  if(page !== getState().serieList.pagination.nextPage) {
+    return null;
+  }
+  return dispatch(fetchSeriePage(page));
+}
+
 export const SERIE_REQUEST = 'SERIE_REQUEST';
 export const SERIE_SUCCESS = 'SERIE_SUCCESS';
 export const SERIE_FAILURE = 'SERIE_FAILURE';
@@ -62,4 +69,13 @@ export const loadSerie = (serieID, requiredFields = []) => (dispatch, getState) 
   }
 
   return dispatch(fetchSerie(serieID));
+}
+
+export const SHOW_ALL_SERIES = 'SHOW_ALL_SERIES';
+
+export const showAllSeries = () => (dispatch, getState) => {
+  if(!getState().serieList.showSearchResults) { 
+    return null;
+  }
+  return dispatch(() => ({ type: SHOW_ALL_SERIES }));
 }
