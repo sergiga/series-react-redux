@@ -4,9 +4,13 @@ import PropTypes from 'prop-types';
 function Thumbnail(props) {
   const { image, title } = props;
 
+  const imageComponent = image 
+    ? <img className='thumbnail-image' src={image} alt='Thumbnail'></img>
+    : <div className='thumbnail-image-alt'>No image</div>
+
   return (
     <div className='thumbnail'>
-      <img className='thumbnail-image' src={image} alt='Thumbnail'></img>
+      {imageComponent}  
       <div className='thumbnail-content'>
         <div className='thumbnail-title'>{title}</div>
       </div>
@@ -15,7 +19,7 @@ function Thumbnail(props) {
 }
 
 Thumbnail.propTypes = {
-  image: PropTypes.string.isRequired,
+  image: PropTypes.string,
   title: PropTypes.string.isRequired
 }
 

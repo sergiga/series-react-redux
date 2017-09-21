@@ -36,9 +36,11 @@ class SeriesPage extends Component {
   }
 
   renderSerie(serie) {
+    const image = serie.image ? serie.image.medium : null;
+
     return (
       <Thumbnail
-        image={serie.image.medium}
+        image={image}
         title={serie.name} />
     );
   }

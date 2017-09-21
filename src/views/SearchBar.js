@@ -14,6 +14,7 @@ class SearchBar extends Component {
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleInputChange(event) {
@@ -24,19 +25,26 @@ class SearchBar extends Component {
     });
   }
 
-  render() {
+  handleSubmit(event) {
+    event.preventDefault();
+
     const { serie } = this.state;
     const { onSearchSerieClick } = this.props;
+    onSearchSerieClick(serie);
+  }
+
+  render() {
+    const { serie } = this.state;
     
     return (
-      <div className='search-bar'>
-        <button onClick={ () => onSearchSerieClick(serie) } ><i className='fa fa-search'></i></button>
+      <form className='search-bar' onSubmit={this.handleSubmit} >
+        <button type='submit'><i className='fa fa-search'></i></button>
         <input 
           name='serie' 
           type='text'
           value={serie}
           onChange={this.handleInputChange} />
-      </div>
+      </form>
     );
   }
 }

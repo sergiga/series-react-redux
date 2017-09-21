@@ -75,6 +75,16 @@ button:focus {
   border-radius: 2px;
 }
 
+.thumbnail-image-alt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 208px;
+  height: 293px;
+  font-weight: bold;
+  border: 1px solid #CCC;
+}
+
 .thumbnail-content {
   position: relative;
   min-height: 53px;
