@@ -7,7 +7,7 @@ function Thumbnail(props) {
     <div className='thumbnail'>
       <img className='thumbnail-image' src={image} alt='Thumbnail'></img>
       <div className='thumbnail-content'>
-        <span className='thumbnail-title'>{title}</span>
+        <div className='thumbnail-title'>{title}</div>
         <span className='thumbnail-meta'>{meta}</span>
       </div>
     </div>
