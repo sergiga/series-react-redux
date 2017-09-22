@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loadSeriePage } from '../actions';
+import { loadSeriePage, searchSerie, showAllSeries } from '../actions';
 import Grid from '../views/Grid';
 import Thumbnail from '../views/Thumbnail';
+import SearchBar from '../views/SearchBar';
+import Header from '../views/Header';
 
 class SeriesPage extends Component {
   static propTypes = {
-    allSeries: PropTypes.array.isRequired
+    allSeries: PropTypes.array.isRequired,
+    nextPage: PropTypes.number.isRequired,
+    loadSeriePage: PropTypes.func.isRequired, 
+    searchSerie: PropTypes.func.isRequired,
+    showAllSeries: PropTypes.func.isRequired
   }
 
   constructor(props) {
     super(props);
     this.onLoadMoreClick = this.onLoadMoreClick.bind(this);
+    this.onSearchSerieClick = this.onSearchSerieClick.bind(this);
   }
   
   componentWillMount() {
@@ -24,44 +31,61 @@ class SeriesPage extends Component {
     loadSeriePage(nextPage);
   }
 
+  onSearchSerieClick(query) {
+    const { searchSerie } = this.props;
+    const serie = query.toLowerCase().replace(/ /g, '-');
+    searchSerie(serie);
+  }
+
   renderSerie(serie) {
+    const image = serie.image ? serie.image.medium : null;
+
     return (
       <Thumbnail
-        image={serie.image.medium}
-        title={serie.name}
-        meta={serie.rating.average} />
+        image={image}
+        title={serie.name} />
     );
   }
 
   render() {
-    const { allSeries } = this.props;
+    const { allSeries, showSearchResults, showAllSeries } = this.props;
 
     return (
-      <Grid
-        items={allSeries}
-        renderItem={this.renderSerie} 
-        onLoadMoreClick={this.onLoadMoreClick} />
+      <div>
+        <Header
+          left={<button onClick={showAllSeries}>Show All Series</button>}
+          right={<SearchBar onSearchSerieClick={this.onSearchSerieClick} />} />
+        <Grid
+          items={allSeries}
+          renderItem={this.renderSerie} 
+          onLoadMoreClick={showSearchResults ? undefined : this.onLoadMoreClick} />
+      </div>
     )
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
   const {
-    serieList: { pagination },
+    serieList: { pagination, searchResults, showSearchResults },
     entities: { series }
   } = state;
   
-  const allSeries = pagination.series.map(id => series[id]);
+  const allSeries = showSearchResults
+    ? searchResults.map(id => series[id])
+    : pagination.series.map(id => series[id]);
 
   return {
     allSeries,
-    nextPage: pagination.nextPage
+    nextPage: pagination.nextPage,
+    showSearchResults
   }
 }
 
 export default connect(
   mapStateToProps,
   {
-    loadSeriePage
+    loadSeriePage, 
+    searchSerie,
+    showAllSeries
   }
 )(SeriesPage);

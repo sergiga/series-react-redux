@@ -4,14 +4,16 @@ export const SEARCH_REQUEST = 'SEARCH_REQUEST';
 export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
 export const SEARCH_FAILURE = 'SEARCH_FAILURE';
 
-export const searchSerie = serie => ({
-  [API_MIDDLEWARE]: {
-    types: [ SEARCH_REQUEST, SEARCH_SUCCESS, SEARCH_FAILURE ],
-    endpoint: 'search/shows',
-    query: { q: serie },
-    schema: Schemas.SERIE_ARRAY
-  }
-});
+export const searchSerie = serie => dispatch => {
+  return dispatch({
+    [API_MIDDLEWARE]: {
+      types: [ SEARCH_REQUEST, SEARCH_SUCCESS, SEARCH_FAILURE ],
+      endpoint: 'search/shows',
+      query: { q: serie },
+      schema: Schemas.SERIE_ARRAY
+    }
+  });
+}
 
 export const SERIE_PAGE_REQUEST = 'SERIE_PAGE_REQUEST';
 export const SERIE_PAGE_SUCCESS = 'SERIE_PAGE_SUCCESS';
@@ -77,5 +79,5 @@ export const showAllSeries = () => (dispatch, getState) => {
   if(!getState().serieList.showSearchResults) { 
     return null;
   }
-  return dispatch(() => ({ type: SHOW_ALL_SERIES }));
+  return dispatch({ type: SHOW_ALL_SERIES });
 }
