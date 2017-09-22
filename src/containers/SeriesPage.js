@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loadSeriePage, searchSerie, showAllSeries } from '../actions';
 import Grid from '../views/Grid';
@@ -41,9 +42,11 @@ class SeriesPage extends Component {
     const image = serie.image ? serie.image.medium : null;
 
     return (
-      <Thumbnail
-        image={image}
-        title={serie.name} />
+      <Link to={'/series/' + serie.id}>
+        <Thumbnail
+          image={image}
+          title={serie.name} />
+      </Link>
     );
   }
 
