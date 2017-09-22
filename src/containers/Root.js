@@ -4,13 +4,14 @@ import { Provider } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import App from './App';
 import SeriesPage from './SeriesPage';
+import Serie from './SeriePage';
 
 const Root = ({ store }) => (
   <Provider store={store}>
     <App>
       <Switch>
+        <Route name='serie' path="/series/:id" component={ Serie }/>
         <Route name='series' path="/" component={ SeriesPage }/>
-        {/*<Route name='serie' path="/series/:id" component={ Serie }/>*/}
       </Switch>
     </App>
   </Provider>
