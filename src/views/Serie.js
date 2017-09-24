@@ -4,7 +4,12 @@ import List from './List';
 
 class Serie extends Component {
   static propTypes = {
-    
+    cast: PropTypes.array,
+    genres: PropTypes.array.isRequired,
+    image: PropTypes.object,
+    name: PropTypes.string.isRequired,
+    rating: PropTypes.object,
+    summary: PropTypes.string
   }
 
   renderImage(image) {
@@ -19,11 +24,11 @@ class Serie extends Component {
   }
 
   renderActor(actor) {
+    const { name } = actor;
     const image = (actor.image 
       ? <img className='actor-image' src={actor.image.medium} alt={name}></img>
       : <div className='actor-image-alt'>No image</div>
     );
-    const { name } = actor;
 
     return (
       <div className='actor-overview'>
