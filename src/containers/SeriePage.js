@@ -7,7 +7,8 @@ import Header from '../views/Header';
 
 class SeriePage extends Component {
   static propTypes = {
-    serie: PropTypes.object
+    serie: PropTypes.object,
+    loadSerie: PropTypes.func.isRequired
   }
   
   componentWillMount() {
