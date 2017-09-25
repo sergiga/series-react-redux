@@ -20,6 +20,12 @@ body {
   color: #444;
 }
 
+a:-webkit-any-link {
+    color: inherit;
+    text-decoration: none;
+    cursor: auto;
+}
+
 .container {
   max-width: 1040px;
   width: 1040px;
@@ -49,6 +55,93 @@ button::-moz-focus-inner{
 
 button:focus {
   outline: none;
+}
+
+h2 {
+  padding-bottom: 4px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #CCC;
+}
+
+h2 span {
+  padding-bottom: 4px;
+  border-bottom: 2px solid #00B8D4;
+}
+
+/* Serie Page Component */
+
+.serie-page{ 
+  padding: 25px;
+}
+
+.serie-page .header {
+  padding: 0px 0px 25px 0px;
+}
+
+.serie-info {
+  display: flex;
+}
+
+.serie-image img {
+  display: block;
+}
+
+.serie-overview {
+  display: flex;
+  flex-direction: column;
+  padding-left: 25px; 
+}
+
+.serie-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.serie-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.serie-genre {
+  display: flex;
+}
+
+.serie-genre-item {
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 8px;
+  margin-right: 4px;
+  border-radius: 4px;
+  color: rgba(0,0,0,0.87);
+  background-color: #00B8D4;
+}
+
+.serie-rating {
+  font-weight: bold;
+}
+
+.serie-summary {
+  text-align: justify;
+}
+
+.serie-cast { 
+  margin-top: 50px;
+}
+
+/* Actor */
+
+.actor-overview {
+  display: flex;
+  align-items: center;
+  max-height: 45px;
+  border-bottom: 1px solid #CCC;
+}
+
+.actor-overview img {
+  height: 45px;
+  margin-right: 12px;
 }
 
 /* Grid */
@@ -101,6 +194,13 @@ button:focus {
   text-transform: uppercase;
 }
 
+/* List */ 
+
+.list-container {
+  display: flex;
+  flex-direction: column;
+}
+
 /* Header */ 
 
 .header {
@@ -109,10 +209,14 @@ button:focus {
   padding: 25px 25px 0px 25px;
 }
 
-.header button {
+.header button, .header a {
   font-size: 14px;
   text-transform: uppercase;
   background-color: #FFF;
+}
+
+.header a {
+  font-weight: bold;
 }
 
 /* Search Bar */
