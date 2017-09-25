@@ -36,8 +36,8 @@ const mapStateToProps = (state, ownProps) => {
   } = state;
 
   const serieID = ownProps.match.params.id;
-  let serie = series[serieID];
-  
+  let serie = merge({}, series[serieID]);
+
   if(serie && serie.cast) {
     serie.cast = serie.cast.map(castID => actors[castID]);
   }
