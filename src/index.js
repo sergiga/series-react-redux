@@ -1,15 +1,25 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import todoApp from './reducers/reducers';
-import App from './views/App';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import apiMiddleware from './middleware/api';
+import rootReducer from './reducers/index';
+import Root from './containers/Root';
+import './styles/index.css';
+import '../node_modules/font-awesome/css/font-awesome.min.css';
 
-const store = createStore(todoApp);
+const store = createStore(
+  rootReducer,
+  applyMiddleware(
+    thunkMiddleware,
+    apiMiddleware
+  )
+);
 
 render(
-  <Provider store={store}>
-    <App />
-  </Provider>, 
+  <Router>
+    <Root store={store} />
+  </Router>,
   document.getElementById('root')
 );
