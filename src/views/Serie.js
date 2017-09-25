@@ -14,13 +14,13 @@ class Serie extends Component {
 
   renderImage(image) {
     return(image 
-      ? <img className='serie-image' src={image.medium} alt='Poster'></img>
+      ? <img src={image.medium} alt='Poster'></img>
       : <div className='serie-image-alt'>No image</div>
     );
   }
 
   renderGenres(genres) {
-    return genres.map((g, i) => <div key={i} className='serie-genre-meta'>{g}</div>);
+    return genres.map((g, i) => <div key={i} className='serie-genre-item'>{g}</div>);
   }
 
   renderActor(actor) {
@@ -40,7 +40,7 @@ class Serie extends Component {
 
   flattenCast(cast) {
     if(!cast) { return null; }
-    
+
     const vArr = cast.map(c => c.id);
     return cast.filter((_, i) => vArr.indexOf(vArr[i]) === i);
   }
@@ -54,21 +54,28 @@ class Serie extends Component {
     return(
       <div className='serie'>
         <div className='serie-info'>
-          {this.renderImage(image)}
+          <div className='serie-image'>
+            {this.renderImage(image)}
+          </div>
           <div className='serie-overview'>
-            <div className='serie-overview-item'>
+            <div className='serie-overview-item serie-title'>
               {name}
-              {rating.average}
             </div>
-            <div className='serie-overview-item'>
+            <div className='serie-overview-item serie-meta'>
+              <div className='serie-genre'>
+                {this.renderGenres(genres)}
+              </div>
+              <div className='serie-rating'>
+                {rating.average}
+              </div>
+            </div>
+            <div className='serie-overview-item serie-summary'>
               {summary}
-            </div>
-            <div className='serie-overview-item'>
-              {this.renderGenres(genres)}
             </div>
           </div>
         </div>
         <div className='serie-cast'>
+          <h2><span>CAST</span></h2>
           <List
             items={this.flattenCast(cast)}
             renderItem={this.renderActor} />
