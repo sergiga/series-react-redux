@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loadSerie } from '../actions';
 import Serie from '../views/Serie';
 import Header from '../views/Header';
+import merge from 'lodash/merge';
 
 class SeriePage extends Component {
   static propTypes = {
@@ -20,10 +22,12 @@ class SeriePage extends Component {
   render() {
     const { serie } = this.props;
 
-    const serieComponent = serie ? <Serie {...serie} /> : null;
+    const serieComponent = serie.id ? <Serie {...serie} /> : null;
 
     return (
-      <div>
+      <div className='serie-page'>
+        <Header
+          left={<Link to='/'>HOME</Link>} />
         {serieComponent}
       </div>
     )
