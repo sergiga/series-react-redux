@@ -38,6 +38,13 @@ class Serie extends Component {
     );
   }
 
+  flattenCast(cast) {
+    if(!cast) { return null; }
+    
+    const vArr = cast.map(c => c.id);
+    return cast.filter((_, i) => vArr.indexOf(vArr[i]) === i);
+  }
+
   render() {
     const { image, name, genres, rating, cast } = this.props;
     let { summary } = this.props;
@@ -63,7 +70,7 @@ class Serie extends Component {
         </div>
         <div className='serie-cast'>
           <List
-            items={cast}
+            items={this.flattenCast(cast)}
             renderItem={this.renderActor} />
         </div>
       </div>
